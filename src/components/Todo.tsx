@@ -8,11 +8,17 @@ const Todo = () => {
   if (error) return <p>{error.message}</p>;
 
   return (
-    <div>
+    <ul className="flex flex-col justify-center items-center">
+      Todo List
       {data?.map((todo) => (
-        <p key={todo.id}>{todo.title}</p>
+        <li
+          key={todo.id}
+          className=" border-slate-500 border-1 w-88 text-center rounded-md gap"
+        >
+          {todo.title}
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
 
