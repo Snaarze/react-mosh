@@ -1,6 +1,11 @@
+import { useMutation } from "@tanstack/react-query";
 import useTodo from "../hooks/useTodos";
+import PostForm from "./PostForm";
 
 const Todo = () => {
+  const addTodo = useMutation({
+    
+  });
   const { error, data, isLoading } = useTodo();
 
   if (isLoading) return <p>Loading....</p>;
@@ -9,6 +14,7 @@ const Todo = () => {
 
   return (
     <ul className="flex flex-col justify-center items-center">
+      <PostForm />
       Todo List
       {data?.map((todo) => (
         <li

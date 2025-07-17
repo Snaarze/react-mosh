@@ -1,22 +1,18 @@
-import apiClient from "../services/api-client";
-import { useQuery } from "@tanstack/react-query";
 
-interface Todo {
-  id: number;
-  title: string;
-  completed: boolean;
-}
+import { useQuery } from "@tanstack/react-query";
+import { CACHE_KEY_TODOS } from "./constant";
+import TodoService from "../services/TodoService";
+import { Todo } from "../services/TodoService";
 
 
 const useTodo = () => {
-    const fetchTodo = () =>
-    apiClient.get<Todo[]>("/todos").then((res) => res.data);
+	// fetching the todos api
+	const data = useQuery<Todo[], Error>({
+		queryKey: CACHE_KEY_TODOS,
+		queryFn: TodoService.getAll,
+		staleTime : 10 * 1000
+	});
 
-  const data = useQuery<Todo[], Error>({
-    queryKey: ["todos"],
-    queryFn: fetchTodo,
-    staleTime : 10 * 1000
-  });
 
   return data
 }
